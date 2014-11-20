@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>搜索</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta name="format-detection" content="telphone=no, email=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/zepto.min.js"></script>
+</head>
+<body class="single-header">
+<div class="header">
+    <h1>搜索</h1>
+</div>
+<div class="wrap-page">
+    <div class="search-bar">
+        <div class="search-frame">
+            <input id="txtSearch" type="search" placeholder="请输入楼盘名">
+            <a id="searchCancel" class="icon icon-cancel"></a>
+        </div>
+        <div class="search-button">
+            <a href="#" class="button button-small search-button-cancel">取消</a>
+            <a href="#" class="button button-small search-button-search">搜索</a>
+        </div>
+    </div>
+    <ul class="search-item-list">
+        <li>枫桥紫郡</li>
+        <li>枫桥紫郡</li>
+        <li>枫桥紫郡</li>
+        <li>枫桥紫郡</li>
+    </ul>
+    <div class="search-delete-item">清空搜索历史</div>
+</div>
+<script>
+    $("#searchCancel").on("click", function(){
+        $("#txtSearch").val("");
+        $(".search-bar").removeClass("search-bar-on");
+    });
+
+    $("#txtSearch").on("input", function() {
+        if(this.value == "") {
+            $(".search-bar").removeClass("search-bar-on");
+        } else {
+            $(".search-bar").addClass("search-bar-on");
+        }
+    })
+</script>
+</body>
+</html>

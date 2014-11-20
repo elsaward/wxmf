@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>现有房团</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta name="format-detection" content="telphone=no, email=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+</head>
+<body class="kf">
+<div class="header kf-header">
+    <h1>现有房团</h1>
+    <div class="nav">
+        <a href="#" data-title="区域"><div>区域</div></a>
+        <a href="#" data-title="时间"><div>时间</div></a>
+    </div>
+</div>
+<ul class="nav-list">
+    <li>不限</li>
+    <li>静安静安静安静安</li>
+    <li>浦东</li>
+    <li>闵行</li>
+    <li>嘉定</li>
+    <li>普陀</li>
+    <li>松江</li>
+    <li>宝山</li>
+</ul>
+<div class="wrap-page">
+    <div class="reload">
+        刷新刷新
+    </div>
+    <div class="page">
+        <div class="list">
+            <div class="card card-0">
+                <h2>华府壹区</h2>
+                <div class="img-tip">
+                    <img src="images/pic.jpg" alt="">
+                    <div class="tip">特别优惠</div>
+                </div>
+                <div class="info">
+                    <p>市场均价：11000元/平米</p>
+                    <p>已报名人数50人</p>
+                    <a class="button pos-r" href="#">报名</a>
+                </div>
+            </div>
+            <div class="card card-0">
+                <h2>华府壹区</h2>
+                <div class="img-tip">
+                    <img src="images/pic.jpg" alt="">
+                    <div class="tip">特别优惠</div>
+                </div>
+                <div class="info">
+                    <p>市场均价：11000元/平米</p>
+                    <p>已报名人数50人</p>
+                    <a class="button pos-r" href="#">报名</a>
+                </div>
+            </div>
+            <div class="card card-0">
+                <h2>华府壹区</h2>
+                <div class="img-tip">
+                    <img src="images/pic.jpg" alt="">
+                    <div class="tip">特别优惠</div>
+                </div>
+                <div class="info">
+                    <p>市场均价：11000元/平米</p>
+                    <p>已报名人数50人</p>
+                    <a class="button pos-r" href="#">报名</a>
+                </div>
+            </div>
+            <div class="card card-0">
+                <h2>华府壹区</h2>
+                <div class="img-tip">
+                    <img src="images/pic.jpg" alt="">
+                    <div class="tip">特别优惠</div>
+                </div>
+                <div class="info">
+                    <p>市场均价：11000元/平米</p>
+                    <p>已报名人数50人</p>
+                    <a class="button pos-r" href="#">报名</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <i class="icon icon-call"></i>
+    <h2>发起房团</h2>
+</div>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<!-- build:js({app,.tmp}) scripts/main.js -->
+<!-- endbuild -->
+<script>
+    var nav = $(".nav");
+    var navItem = nav.children("a");
+    var menu = $(".nav-list");
+    var body = $("body");
+    var menuTarget;
+    navItem.on("click", function(e) {
+        var target = $(this);
+        menuTarget = target;
+        if(target.hasClass("active")) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+        e.preventDefault();
+    });
+
+    menu.on("click", "li", function(e) {
+        var condition = $(e.target).html();
+        if(condition == "不限") {
+            menuTarget.children().html(menuTarget.data("title"));
+            menuTarget.removeClass("on-condition");
+        } else {
+            menuTarget.children().html(condition);
+            menuTarget.addClass("on-condition");
+        }
+        closeMenu();
+    });
+
+    function openMenu() {
+        menuTarget.siblings().removeClass("active");
+        nav.addClass("menu-on");
+        menu.addClass("on");
+        body.addClass("lock");
+        menuTarget.addClass("active");
+    }
+
+    function closeMenu() {
+        nav.removeClass("menu-on");
+        menu.removeClass("on");
+        body.removeClass("lock");
+        menuTarget.removeClass("active");
+    }
+</script>
+</body>
+</html>
