@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>提示</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta name="format-detection" content="telphone=no, email=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+<div class="tips box-v">
+    <div class="flex-1"></div>
+    <div class="flex-1">
+        <div class="tips-title">
+            <h2>提示</h2>
+        </div>
+        <div class="tips-msg">
+            <p>确定拨打电话：400-021-0655吗？</p>
+        </div>
+        <div class="tips-control">
+            <div>
+                <a href="#" class="button-circle button-red">取消</a>
+            </div>
+            <div>
+                <a href="#" class="button-circle button-green">确定</a>
+            </div>
+        </div>
+    </div>
+    <div class="flex-1"></div>
+</div>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script>
+    $("#txtBuilding").on("click", function(e) {
+        $("#buildingModal").addClass("on");
+        e.preventDefault();
+    });
+    $(".modal-close").on("click", function(e) {
+        $(this).parents(".modal").removeClass("on");
+        e.preventDefault();
+    })
+</script>
+</body>
+</html>

@@ -31,12 +31,13 @@
     <li>普陀</li>
     <li>松江</li>
     <li>宝山</li>
+    <li>查不到</li>
 </ul>
 <div class="wrap-page">
     <div class="reload">
         刷新刷新
     </div>
-    <div class="page">
+    <div id="list-page" class="page">
         <div class="list">
             <div class="card card-0">
                 <h2>华府壹区</h2>
@@ -88,10 +89,19 @@
             </div>
         </div>
     </div>
+    <div id="empty-page" class="page page-empty page-disabled">
+        <div class="flex-1"></div>
+        <div>
+            <img src="images/sorry.png" alt="">
+            <br>
+            <span>房子都去哪儿了...</span>
+        </div>
+        <div class="flex-1"></div>
+    </div>
 </div>
 <div class="footer">
     <i class="icon icon-call"></i>
-    <h2>发起房团</h2>
+    <h2><a href="form-1.html">发起房团</a></h2>
 </div>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
@@ -106,6 +116,8 @@
     var menu = $(".nav-list");
     var body = $("body");
     var menuTarget;
+    var listPage = $("#list-page");
+    var emptyPage = $("#empty-page");
     navItem.on("click", function(e) {
         var target = $(this);
         menuTarget = target;
@@ -119,6 +131,17 @@
 
     menu.on("click", "li", function(e) {
         var condition = $(e.target).html();
+
+        //模拟查不到信息
+        if(condition == "查不到") {
+            emptyPage.removeClass("page-disabled");
+            listPage.addClass("page-disabled");
+        } else {
+            listPage.removeClass("page-disabled");
+            emptyPage.addClass("page-disabled");
+        }
+
+
         if(condition == "不限") {
             menuTarget.children().html(menuTarget.data("title"));
             menuTarget.removeClass("on-condition");

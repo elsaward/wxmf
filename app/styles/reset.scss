@@ -50,6 +50,7 @@ svg:not(:root) {
 }
 
 a {
+  color: inherit;
   background: transparent;
   text-decoration: none;
   -webkit-tap-highlight-color: transparent;
