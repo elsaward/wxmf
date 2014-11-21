@@ -1,0 +1,5 @@
+require([
+    "scripts/common"
+], function() {
+
+});

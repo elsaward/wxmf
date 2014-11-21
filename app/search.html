@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
     <meta name="format-detection" content="telphone=no, email=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/zepto.min.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="single-header">
 <div class="header">
@@ -20,31 +19,93 @@
             <a id="searchCancel" class="icon icon-cancel"></a>
         </div>
         <div class="search-button">
-            <a href="#" class="button button-small search-button-cancel">取消</a>
-            <a href="#" class="button button-small search-button-search">搜索</a>
+            <a href="#" class="button button-small search-button-cancel go-back">取消</a>
+            <a id="searchBtn" href="#" class="button button-small search-button-search">搜索</a>
         </div>
     </div>
-    <ul class="search-item-list">
-        <li>枫桥紫郡</li>
-        <li>枫桥紫郡</li>
-        <li>枫桥紫郡</li>
-        <li>枫桥紫郡</li>
-    </ul>
+    <ul class="search-item-list"></ul>
     <div class="search-delete-item">清空搜索历史</div>
 </div>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/requirejs/require.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 <script>
-    $("#searchCancel").on("click", function(){
-        $("#txtSearch").val("");
-        $(".search-bar").removeClass("search-bar-on");
-    });
-
-    $("#txtSearch").on("input", function() {
-        if(this.value == "") {
-            $(".search-bar").removeClass("search-bar-on");
-        } else {
-            $(".search-bar").addClass("search-bar-on");
+    require([
+        "scripts/common"
+    ], function() {
+        var searchItems = localStorage.getItem("searchItems") || "";
+        var txtSearch = $("#txtSearch");
+        var itemsList = $(".search-item-list");
+        var delItemsBtn = $(".search-delete-item");
+        var arrayItems = [], i, len, len2, htmlCode = "";
+        if(searchItems != "") {
+            arrayItems = searchItems.split(",");
+            len = arrayItems.length;
+            len2 = len > 5 ? (len - 5) : 0;
+            for(i = len - 1; i >= len2; i--) {
+                htmlCode += arrayItems[i] ? '<li data-index="' + i + '">' + arrayItems[i] + '</li>' : '';
+            }
+            itemsList.append(htmlCode);
+            delItemsBtn.show();
         }
-    })
+
+        clearSearchBar();
+
+        $("#searchCancel").on("click", function(){
+            clearSearchBar();
+        });
+
+        txtSearch.on("input", function() {
+            if(this.value == "") {
+                $(".search-bar").removeClass("search-bar-on");
+            } else {
+                $(".search-bar").addClass("search-bar-on");
+            }
+        });
+
+        itemsList.on("click", "li", function(e) {
+            var li = $(e.target);
+            var index = li.data("index");
+            var tmp = arrayItems.splice(index, 1);
+            arrayItems = arrayItems.concat(tmp);
+            goSearch(li.text());
+        });
+
+        $("#searchBtn").on("click", function(e) {
+            var keyword = $.trim(txtSearch.val());
+            if(keyword == "") {
+                clearSearchBar();
+                return false;
+            }
+            arrayItems.push(txtSearch.val());
+            goSearch(keyword);
+            e.preventDefault();
+        });
+
+        delItemsBtn.on("click", function(e) {
+            arrayItems = [];
+            itemsList.html("");
+            delItemsBtn.hide();
+            localStorage.setItem("searchItems", "");
+        });
+
+        function clearSearchBar() {
+            txtSearch.val("");
+            $(".search-bar").removeClass("search-bar-on");
+        }
+
+        function goSearch(keyword) {
+            var option = {
+                url: "",
+                data: {keyword: keyword}
+            };
+            localStorage.setItem("searchItems", arrayItems.join(","));
+            location.href = "gdlp-2.html?h=" + keyword;
+        }
+    });
 </script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta name="format-detection" content="telphone=no, email=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="single-header">
+<div class="header">
+    <div class="msg">您所参加的看房团楼盘是：华府壹区</div>
+    <a href="#" class="back"></a>
+</div>
+<div class="wrap-page form-wrap">
+    <div class="box-v form">
+        <div class="flex-2">
+            <div class="form-row form-row-line form-row-icon icon-user">
+                <input type="text" placeholder="请输入您的姓名">
+            </div>
+            <div class="form-row form-row-line form-row-icon icon-phone">
+                <input type="text" placeholder="请输入手机号码">
+            </div>
+            <div class="form-row">
+                <input id="formSubmit" type="button" class="button button-large" value="立即报名">
+            </div>
+        </div>
+        <div class="flex-1 form-info">
+            <p>参与我爱买房网看房团，感觉自己萌萌哒</p>
+            <p>请准确填写以上预约信息，我们会有专人与您联系！</p>
+        </div>
+    </div>
+</div>
+<div id="wxModal" class="modal">
+    <div class="tips box-v">
+        <div class="flex-1"></div>
+        <div class="flex-1">
+            <div class="tips-title">
+                <h2>提示</h2>
+            </div>
+            <div class="tips-msg">
+                <p>您的预约看房已成功！加入微信号：xxxxxx</p>
+                <p>和小伙伴们一起交流看房吧！</p>
+            </div>
+            <div class="tips-control">
+                <div>
+                    <a href="#" class="button button-control button-red modal-close">以后再说</a>
+                </div>
+                <div>
+                    <a href="#" class="button button-control button-green">马上就去</a>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1"></div>
+    </div>
+</div>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/requirejs/require.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<script>
+    require([
+        "scripts/common"
+    ], function() {
+        $("#formSubmit").on("click", function(e) {
+            location.href = "#wxModal";
+        });
+    });
+</script>
+</body>
+</html>

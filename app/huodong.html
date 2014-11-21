@@ -6,99 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
     <meta name="format-detection" content="telphone=no, email=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
 </head>
 <body class="hd">
 <div class="header hd-header">
-    <h1>往期看房</h1>
+    <h1 class="list-h">往期看房</h1>
 </div>
 <div class="wrap-page">
     <div class="page">
-        <div class="list list-center-line">
-            <div class="event">
-                <div class="event-inner">
-                    <div class="event-content">
-                        <img class="img-border" src="images/pic151-104.jpg" alt="">
-                        <div class="event-info">
-                            <div class="event-time">2014.07.26</div>
-                            <div class="event-title">我爱买房网嘉定专线看房团即将启动 </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="event">
-                <div class="event-inner">
-                    <div class="event-content">
-                        <img class="img-border" src="images/pic151-104.jpg" alt="">
-                        <div class="event-info">
-                            <div class="event-time">2014.07.26</div>
-                            <div class="event-title">我爱买房网嘉定专线看房团即将启动 </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="event">
-                <div class="event-inner">
-                    <div class="event-content">
-                        <img class="img-border" src="images/pic151-104.jpg" alt="">
-                        <div class="event-info">
-                            <div class="event-time">2014.07.26</div>
-                            <div class="event-title">我爱买房网嘉定专线看房团即将启动 </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="event">
-                <div class="event-inner">
-                    <div class="event-content">
-                        <img class="img-border" src="images/pic151-104.jpg" alt="">
-                        <div class="event-info">
-                            <div class="event-time">2014.07.26</div>
-                            <div class="event-title">我爱买房网嘉定专线看房团即将启动 </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="event">
-                <div class="event-inner">
-                    <div class="event-content">
-                        <img class="img-border" src="images/pic151-104.jpg" alt="">
-                        <div class="event-info">
-                            <div class="event-time">2014.07.26</div>
-                            <div class="event-title">我爱买房网嘉定专线看房团即将启动 </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="event">
-                <div class="event-inner">
-                    <div class="event-content">
-                        <img class="img-border" src="images/pic151-104.jpg" alt="">
-                        <div class="event-info">
-                            <div class="event-time">2014.07.26</div>
-                            <div class="event-title">我爱买房网嘉定专线看房团即将启动 </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="list list-center-line"></div>
+    </div>
+</div>
+<div class="footer hd-footer">
+    <a href="fangtuan.html" class="button-3d">现有房团</a>
+</div>
+<script type="text/html" id="event-list">
+<div class="event">
+    <div class="event-inner">
+        <div class="event-content">
+            <a href="{{url}}"><img class="img-border" src="{{src}}" alt=""></a>
+            <div class="event-info">
+                <div class="event-time">{{time}}</div>
+                <div class="event-title">{{title}}</div>
             </div>
         </div>
     </div>
 </div>
-<div class="footer hd-footer">
-    <a href="#" class="button-3d">现有房团</a>
-</div>
+</script>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
 <script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/requirejs/require.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
-<!-- build:js({app,.tmp}) scripts/main.js -->
-<!-- endbuild -->
+<script>
+    require([
+        "scripts/render",
+        "scripts/common"
+    ], function(render) {
+        $.ajax({
+            url: "data/hd.json",
+            success: renderEvents
+        });
+        function renderEvents(res) {
+            if(typeof res == "string") res = $.parseJSON(res);
+            var tpl = $("#event-list").html();
+            var container = $(".list");
+            container.append(render(tpl, res));
+        }
+    });
+</script>
 </body>
 </html>

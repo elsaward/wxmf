@@ -6,8 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
     <meta name="format-detection" content="telphone=no, email=no">
     <meta name="msapplication-tap-highlight" content="no">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/zepto.min.js"></script>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="lp">
 <div class="header lp-header">
@@ -159,6 +158,12 @@
         <a class="icon-house" href="#">现有房团</a>
     </div>
 </div>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/requirejs/require.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
 <script>
     var $mark = $(".tab-mark");
     $mark.eq(0).click();

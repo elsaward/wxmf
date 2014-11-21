@@ -119,12 +119,13 @@ body {
     color: #fff;
     background: $mainOrange;
   }
-  >i {
+  a.icon-call {
     position: absolute;
-    top: 13px;
-    left: 19px;
+    padding: 13px 0 0 19px;
+    width: 67px;
+    height: 40px;
     font-size: 28px;
-    color: $mainOrange
+    color: $mainOrange;
   }
 }
 
@@ -250,6 +251,21 @@ body {
     position: relative;
     line-height: 57px;
     text-align: center;
+    &:after {
+      z-index: -1;
+      position: absolute;
+      top: -190px;
+      left: calc(50% - 138px);
+      width: 238px;
+      height: 238px;
+      border: 19px solid rgba(255,255,255,.5);
+      border-radius: 100%;
+      background: #4bb3a8;
+      background-clip: padding-box;
+      content: " ";
+    }
+  }
+  .list-h {
     &:before {
       position: absolute;
       top: 42px;
@@ -263,19 +279,6 @@ body {
       background: rgba(255,255,255,.7);
       @extend .icon;
       @extend .icon-down;
-    }
-    &:after {
-      z-index: -1;
-      position: absolute;
-      top: -190px;
-      left: calc(50% - 138px);
-      width: 238px;
-      height: 238px;
-      border: 19px solid rgba(255,255,255,.5);
-      border-radius: 100%;
-      background: #4bb3a8;
-      background-clip: padding-box;
-      content: " ";
     }
   }
 }
@@ -394,7 +397,7 @@ body {
       text-align: center;
     }
     .msg {
-      padding: 0 20px;
+      padding-left: 40px;
       height: 57px;
       line-height: 57px;
       font-size: 14px;
@@ -403,10 +406,11 @@ body {
   }
   .wrap-page {
     position: absolute;
-    top: 57px;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
+    padding-top: 57px;
     overflow: hidden;
   }
   .form-wrap,
@@ -790,6 +794,7 @@ input {
 
 .button-large {
   width: 100%;
+  padding: 12px;
   text-align: center;
   font-size: 18px;
 }
@@ -901,6 +906,7 @@ input {
 }
 
 .search-delete-item {
+  display: none;
   height: 49px;
   line-height: 49px;
   color: #525252;
@@ -929,6 +935,10 @@ input {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.modal:target {
+  display: block;
 }
 
 .modal-item-list {
@@ -984,7 +994,7 @@ input {
 
 @for $i from 6 through 11 {
   .text-#{2 * $i} {
-    font-size: 2px * $i;
+    font-size: 2px * $i !important;
   }
 }
 
@@ -1014,16 +1024,6 @@ input {
 
 .badge + .badge {
   margin-left: 5px;
-}
-
-.back-title {
-  font-size: 18px;
-  color: #fff;
-  &:before {
-    margin-right: 5px;
-    @extend .icon;
-  }
-  @extend .icon-arrow-left;
 }
 
 /* img */

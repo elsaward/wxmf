@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>表单</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
+    <meta name="format-detection" content="telphone=no, email=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="single-header">
+<div class="header">
+    <h1>发起组团</h1>
+    <a href="#" class="back "></a>
+    <div class="control">
+        <a class="button button-white button-small" href="gdlp.html">更多楼盘</a>
+    </div>
+</div>
+<div class="wrap-page form-wrap">
+    <div class="box-v form">
+        <div class="flex-2">
+            <div class="form-row form-row-line form-row-icon form-row-arrow icon-building">
+                <input id="txtBuilding" type="text" placeholder="请输入楼盘名称" readonly>
+            </div>
+            <div class="form-row form-row-line form-row-icon icon-user">
+                <input type="text" placeholder="请输入您的姓名">
+            </div>
+            <div class="form-row form-row-line form-row-icon icon-phone">
+                <input type="text" placeholder="请输入手机号码">
+            </div>
+            <div class="form-row">
+                <input id="formSubmit" type="button" class="button button-large" value="我要组团">
+            </div>
+        </div>
+        <div class="flex-1 form-info">
+            <p>5人抱成团，就有免费专车带您看房！</p>
+            <p>请您准确填写以上预约信息，我们会有专人联系您！</p>
+        </div>
+    </div>
+</div>
+<div id="buildingModal" class="modal">
+    <div class="full-modal single-header">
+        <div class="header">
+            <div class="msg text-18">楼盘选择</div>
+            <a href="#" class="back modal-close"></a>
+        </div>
+        <div class="wrap-page">
+            <div class="modal-item-list">
+                <ul id="house-list">
+                    <li>华府壹区1</li>
+                    <li>华府壹区2</li>
+                    <li>华府壹区3</li>
+                    <li>华府壹区4</li>
+                    <li>华府壹区5</li>
+                    <li>华府壹区6</li>
+                    <li>华府壹区7</li>
+                    <li>华府壹区8</li>
+                    <li>华府壹区9</li>
+                    <li>华府壹区10</li>
+                    <li>华府壹区11</li>
+                    <li>华府壹区12</li>
+                    <li>华府壹区13</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="wxModal" class="modal">
+    <div class="tips box-v">
+        <div class="flex-1"></div>
+        <div class="flex-1">
+            <div class="tips-title">
+                <h2>提示</h2>
+            </div>
+            <div class="tips-msg">
+                <p>您的预约看房已成功！加入微信号：xxxxxx</p>
+                <p>和小伙伴们一起交流看房吧！</p>
+            </div>
+            <div class="tips-control">
+                <div>
+                    <a href="#" class="button button-control button-red modal-close">以后再说</a>
+                </div>
+                <div>
+                    <a href="#" class="button button-control button-green">马上就去</a>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1"></div>
+    </div>
+</div>
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/requirejs/require.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+<script>
+    require([
+        "scripts/common"
+    ], function() {
+        $("#txtBuilding").on("click", function(e) {
+            location.href = "#buildingModal";
+        });
+        $("#formSubmit").on("click", function(e) {
+            location.href = "#wxModal";
+        });
+        $("#house-list").on("click", "li", function(e) {
+            $("#txtBuilding").val(e.target.innerText);
+            history.back();
+        })
+    });
+</script>
+</body>
+</html>

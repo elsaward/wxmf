@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>现有房团</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, minimal-ui">
     <meta name="format-detection" content="telphone=no, email=no">
     <meta name="msapplication-tap-highlight" content="no">
     <link rel="stylesheet" href="styles/main.css">
 </head>
-<body class="kf">
+<body class="kf no-footer">
 <div class="header kf-header">
-    <h1>现有房团</h1>
+    <h1>更多楼盘</h1>
     <div class="nav screening"></div>
+    <div class="search">
+        <a class="icon icon-search" href="search.html"></a>
+    </div>
 </div>
 <ul class="nav-list screening-list"></ul>
 <div class="wrap-page">
     <div class="reload">
         刷新刷新
     </div>
-    <div id="list-page" class="page">
+    <div class="page">
         <div class="list screening-data"></div>
     </div>
     <div id="empty-page" class="page page-empty page-disabled">
@@ -31,43 +34,25 @@
         <div class="flex-1"></div>
     </div>
 </div>
-<div class="footer">
-    <a class="icon icon-call" href="#callModal"></a>
-    <h2><a href="form-faqi.html">发起房团</a></h2>
-</div>
-<div id="callModal" class="modal">
-    <div class="tips box-v">
-        <div class="flex-1"></div>
+<script type="text/html" id="lp-list">
+<div class="card card-1 img-tip">
+    <div class="tip">{{tips}}</div>
+    <div class="box">
         <div class="flex-1">
-            <div class="tips-title">
-                <h2>提示</h2>
-            </div>
-            <div class="tips-msg">
-                <p>确定拨打电话：400-021-0655吗？</p>
-            </div>
-            <div class="tips-control">
-                <div>
-                    <a href="#" class="button-circle button-red modal-close">取消</a>
-                </div>
-                <div>
-                    <a href="tel:4000210655" class="button-circle button-green">确定</a>
-                </div>
-            </div>
+            <img class="img-border img-border-padding img-max-101" src="{{src}}" alt="">
         </div>
-        <div class="flex-1"></div>
-    </div>
-</div>
-<script type="text/html" id="ft-list">
-<div class="card card-0">
-    <h2>{{house}}</h2>
-    <div class="img-tip">
-        <img src="{{src}}" alt="">
-        <div class="tip">{{tips}}</div>
-    </div>
-    <div class="info">
-        <p>市场均价：{{price}}元/平米</p>
-        <p>已报名人数{{num}}人</p>
-        <a class="button pos-r" href="form-baoming.html?h={{house}}">报名</a>
+        <div class="flex-1 text-align-left">
+            <p>{{house}}</p>
+            <p>{{address}}</p>
+            <p>
+                <span class="il-b">{{mold}}</span>
+                <span class="il-b"><span class="badge">11号线</span><span class="badge">外环以外</span></span>
+            </p>
+        </div>
+        <div class="flex-1 text-align-right c1-d3">
+            <p class="text-16 text-orange">￥{{price}}</p>
+            <p class="text-orange">元/平米</p>
+        </div>
     </div>
 </div>
 </script>
@@ -77,15 +62,13 @@
 <script src="bower_components/requirejs/require.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
-<!-- build:js({app,.tmp}) scripts/main.js -->
-<!-- endbuild -->
 <script>
     require([
         "scripts/screening",
         "scripts/common"
     ], function(screening) {
         screening.init({
-            "url": "data/ft.json",
+            "url": "data/gdlp.json",
             "conditions": [
                 {
                     "title": "区域",
@@ -102,19 +85,37 @@
                     ]
                 },
                 {
-                    "title": "时间",
-                    "field": "time",
+                    "title": "单价",
+                    "field": "price",
                     "list": [
                         "不限",
-                        "2014-1",
-                        "2014-2",
-                        "2014-3",
-                        "2014-4",
-                        "2014-5"
+                        "10000",
+                        "20000",
+                        "30000"
+                    ]
+                },
+                {
+                    "title": "类型",
+                    "field": "mold",
+                    "list": [
+                        "不限",
+                        "类型1",
+                        "类型2",
+                        "类型3"
+                    ]
+                },
+                {
+                    "title": "排序",
+                    "field": "order",
+                    "list": [
+                        "不限",
+                        "按区域",
+                        "按单价",
+                        "按类型"
                     ]
                 }
             ],
-            "tpl": $("#ft-list").html()
+            "tpl": $("#lp-list").html()
         });
         screening.exec();
     });
