@@ -15,6 +15,7 @@
 <div class="wrap-page">
     <div class="page">
         <div class="list list-center-line"></div>
+        <div class="load-more"></div>
     </div>
 </div>
 <div class="footer hd-footer">
@@ -42,12 +43,13 @@
 <script>
     require([
         "scripts/render",
+        "scripts/load",
         "scripts/common"
-    ], function(render) {
-        $.ajax({
-            url: "data/hd.json",
-            success: renderEvents
+    ], function(render, load) {
+        load.init({
+            url: "data/hd.json"
         });
+        load.buildLoad(renderEvents);
         function renderEvents(res) {
             if(typeof res == "string") res = $.parseJSON(res);
             var tpl = $("#event-list").html();

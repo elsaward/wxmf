@@ -22,7 +22,9 @@
             <div class="card card-2">
                 <div class="box">
                     <div class="flex-1 c2-d1">
-                        <img class="img-border img-max-147" src="images/pic101-75.jpg" alt="">
+                        <a href="#" data-large="images/map-large.jpg">
+                            <img class="img-border img-max-147" src="images/pic101-75.jpg" alt="">
+                        </a>
                     </div>
                     <div class="flex-1 c2-d2">
                         <div>
@@ -40,14 +42,18 @@
                         </div>
                     </div>
                     <div class="flex-1 c2-d1">
-                        <img class="img-border img-max-147" src="images/pic101-75.jpg" alt="">
+                        <a href="#" data-large="images/map-large.jpg">
+                            <img class="img-border img-max-147" src="images/pic101-75.jpg" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
             <div class="card card-2">
                 <div class="box">
                     <div class="flex-1 c2-d1">
-                        <img class="img-border img-max-147" src="images/pic101-75.jpg" alt="">
+                        <a href="#" data-large="images/map-large.jpg">
+                            <img class="img-border img-max-147" src="images/pic101-75.jpg" alt="">
+                        </a>
                     </div>
                     <div class="flex-1 c2-d2">
                         <div>
@@ -64,7 +70,9 @@
                         </div>
                     </div>
                     <div class="flex-1 c2-d1">
-                        <img class="img-border img-max-147" src="images/pic101-75.jpg" alt="">
+                        <a href="#" data-large="images/map-large.jpg">
+                            <img class="img-border img-max-147" src="images/pic101-75.jpg" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -136,7 +144,9 @@
     </div>
     <div id="tab3" class="page page-tab">
         <div class="card card-4">
-            <img src="images/map.jpg" alt="">
+            <a href="#" data-large="images/map-large.jpg">
+                <img src="images/map.jpg" alt="">
+            </a>
         </div>
         <div class="card card-4">
             <p>公交：沪杭高铁（在建）、枫泾二路、枫泾一路、枫梅线、金枫线、石枫专线</p>
@@ -153,8 +163,38 @@
     </div>
 </div>
 <div class="footer">
-    <i class="icon icon-call"></i>
-    <h2>立即预约</h2>
+    <a class="icon icon-call" href="#callModal"></a>
+    <h2><a href="form-faqi.html">立即预约</a></h2>
+</div>
+<div id="picModal" class="modal modal-mask">
+    <div class="middle">
+        <div class="pic-modal">
+            <a class="icon icon-close modal-close" href="#"></a>
+            <img class="big-img" src="images/map-large.jpg">
+        </div>
+    </div>
+</div>
+<div id="callModal" class="modal">
+    <div class="tips box-v">
+        <div class="flex-1"></div>
+        <div class="flex-1">
+            <div class="tips-title">
+                <h2>提示</h2>
+            </div>
+            <div class="tips-msg">
+                <p>确定拨打电话：400-021-0655吗？</p>
+            </div>
+            <div class="tips-control">
+                <div>
+                    <a href="#" class="button-circle button-red modal-close">取消</a>
+                </div>
+                <div>
+                    <a href="tel:4000210655" class="button-circle button-green">确定</a>
+                </div>
+            </div>
+        </div>
+        <div class="flex-1"></div>
+    </div>
 </div>
 <!-- build:js(.) scripts/vendor.js -->
 <!-- bower:js -->
@@ -163,10 +203,14 @@
 <!-- endbower -->
 <!-- endbuild -->
 <script>
-    var $mark = $(".tab-mark");
-    $mark.eq(0).click();
-    $mark.on("click", function(e) {
-        $(this).addClass("active").siblings().removeClass("active");
+    require([
+        "scripts/common"
+    ], function(screening) {
+        location.href = "#tab1";
+        var $mark = $(".tab-mark");
+        $mark.on("click", function(e) {
+            $(this).addClass("active").siblings().removeClass("active");
+        });
     });
 </script>
 </body>

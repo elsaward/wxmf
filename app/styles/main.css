@@ -382,7 +382,8 @@ body {
     line-height: 57px;
     text-align: center; }
   .kf-header .nav {
-    background: #fff; }
+    background: #fff;
+    border-bottom: 1px solid #ccc; }
     .kf-header .nav a {
       position: relative;
       height: 40px;
@@ -430,8 +431,6 @@ body {
         border-color: #e74e28; }
     .kf-header .nav a.on-condition {
       color: #e74e28; }
-  .kf-header .menu-on {
-    border-bottom: 1px solid #ccc; }
   .kf-header .search {
     position: absolute;
     top: 20px;
@@ -542,6 +541,8 @@ body {
     border-top: 1px solid #dbd8d7; }
     .nav-list li:hover {
       background: #efefef; }
+  .nav-list li:first-child {
+    border-top: 0; }
 
 .home-page {
   background: #e74e28; }
@@ -1026,6 +1027,11 @@ input {
   line-height: 40px;
   font-size: 18px; }
 
+.load-more {
+  padding: 10px;
+  text-align: center;
+  font-size: 12px; }
+
 /* modal */
 .modal {
   z-index: 9999;
@@ -1035,6 +1041,18 @@ input {
   bottom: 0;
   left: 0;
   right: 0; }
+  .modal .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 30px;
+    line-height: 30px; }
+
+.pic-modal {
+  position: relative; }
+
+.modal-mask {
+  background: rgba(0, 0, 0, 0.3); }
 
 .modal:target {
   display: block; }
@@ -1162,10 +1180,18 @@ input {
 .img-min-101 {
   min-width: 101px; }
 
-/* margin */
+/* center */
 .center, .tips-title h2 {
   margin-left: auto;
   margin-right: auto; }
+
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%); }
 
 /* icon */
 @font-face {
@@ -1207,9 +1233,6 @@ input {
 
 .icon-phone:before {
   content: "\e608"; }
-
-.icon-xiajiantou2:before {
-  content: "\e609"; }
 
 .icon-user:before {
   content: "\e60a"; }

@@ -138,6 +138,7 @@ body {
   }
   .nav {
     background: #fff;
+    border-bottom: 1px solid #ccc;
     a {
       position: relative;
       height: 40px;
@@ -177,9 +178,6 @@ body {
     a.on-condition {
       color: $mainOrange;
     }
-  }
-  .menu-on {
-    border-bottom: 1px solid #ccc;
   }
   .search {
     position: absolute;
@@ -312,6 +310,9 @@ body {
     &:hover {
       background: #efefef;
     }
+  }
+  li:first-child {
+    border-top: 0;
   }
 }
 
@@ -926,6 +927,12 @@ input {
   font-size: 18px;
 }
 
+.load-more {
+  padding: 10px;
+  text-align: center;
+  font-size: 12px;
+}
+
 /* modal */
 .modal {
   z-index: 9999;
@@ -935,6 +942,21 @@ input {
   bottom: 0;
   left: 0;
   right: 0;
+  .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 30px;
+    line-height: 30px;
+  }
+}
+
+.pic-modal {
+  position: relative;
+}
+
+.modal-mask {
+  background: rgba(0,0,0,.3);
 }
 
 .modal:target {
@@ -986,7 +1008,6 @@ input {
 }
 
 .tips-control {
-
   @include table-equal("div");
 }
 
@@ -1074,10 +1095,17 @@ input {
   min-width: 101px;
 }
 
-/* margin */
+/* center */
 .center {
   margin-left: auto;
   margin-right: auto;
+}
+.middle {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  @include translateY(-50%);
 }
 
 /* icon */
@@ -1130,10 +1158,6 @@ input {
 
 .icon-phone:before {
   content: "\e608";
-}
-
-.icon-xiajiantou2:before {
-  content: "\e609";
 }
 
 .icon-user:before {
