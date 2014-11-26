@@ -1,5 +1,0 @@
-require([
-    "scripts/common"
-], function() {
-
-});

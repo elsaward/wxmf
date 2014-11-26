@@ -29,8 +29,12 @@
 <script src="bower_components/requirejs/require.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
-<!-- build:js({app,.tmp}) scripts/main.js -->
-<script src="scripts/main.js"></script>
-<!-- endbuild -->
+<script>
+    require([
+        "scripts/common"
+    ], function() {
+
+    });
+</script>
 </body>
 </html>
