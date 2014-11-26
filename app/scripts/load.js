@@ -8,11 +8,11 @@ define(function() {
     };
 
     var data = {
-        start: undefined,
-        count: 10
+        start: undefined,   //数据浮标位置
+        count: 10           //一次读取数据数量
     };
 
-    var loadBar = $(".load-more");
+    var loadBar = $(".load-more");  //容器
 
     loadBar.on("click", function() {
         load.loadList();
@@ -20,11 +20,13 @@ define(function() {
 
     var load = {
         init: function(option) {
+            //初始化
             $.extend(msg, option["msg"]);
             this.url = option.url;  //查询url
             this.data = $.extend(data, option["data"]); //查询数据对象
         },
         changeMsg: function(tag) {
+            //改变显示文字
             loadBar.html(msg[tag]);
         },
         buildLoad: function(callback) {
@@ -41,25 +43,25 @@ define(function() {
                 success: function(res) {
                     if(typeof res == "string") res = $.parseJSON(res);
                     if(res.length < self.data.count) {
+                        //如果取得数据量小于设置数量，判断已读完全部
                         self.changeMsg("MSG_NO_RESULT");
                     } else {
+                        //正常读取
                         self.changeMsg("MSG_WAITING");
                     }
+                    //修正浮标位置
                     self.data.start = res["start"];
                     if(typeof self.callback == "function") {
                         self.callback(res["list"]);
                     }
                 },
                 error: function(req) {
+                    //显示错误信息
                     self.changeMsg("MSG_ERROR");
                 }
             });
         }
     };
-
-    function refresh(){}
-
-    function loadMore(){}
 
     return load;
 });

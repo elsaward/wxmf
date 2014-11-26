@@ -11,8 +11,7 @@ body {
   color: #333333;
   background-color: white;
   height: 100%;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch; }
+  overflow-x: hidden; }
 
 article,
 aside,
