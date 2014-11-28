@@ -1,4 +1,7 @@
-// screening.js - 查询条件筛选模块
+/**
+ * 查询条件筛选模块
+ * 新写模块，开发中
+ */
 
 define([
     "./render",
@@ -42,37 +45,69 @@ define([
         closeMenu();
     });
 
+    /**
+     * 筛选条件渲染模板
+     * @param condition     筛选配置
+     * @returns {string}
+     */
     function elementTpl(condition) {
-        //筛选条件渲染模板
         return '<a href="#" data-title="'+condition["title"]+'" data-field="'+condition["field"]+'">' +
             '<div>'+condition["title"]+'</div>' +
             '</a>';
     }
 
+    /**
+     * 筛选条件具体项渲染模板
+     * @param field
+     * @param item
+     * @returns {string}
+     */
     function listTpl(field, item) {
-        //筛选条件具体项渲染模板
         return '<li data-field="'+field+'">'+item+'</li>';
     }
 
+    /**
+     * 筛选控制器
+     * @type {{init: init, exec: exec, createElements: createElements}}
+     */
     var screening = {
+        /**
+         * 初始化
+         * @param option
+         */
         init: function(option) {
-            //初始化
+            /*
+            option
+                url         请求路径
+                tpl         模板
+                condition   筛选条件数组
+                    title           显示文字
+                    field           字段名
+                    list            筛选条目
+             */
             load.init(option);
             load.callback = renderData;
             this.elements = []; //查询筛选项元素数组
             this.tpl = option.tpl;  //查询结果列表渲染模板
             this.createElements(option.conditions); //根据筛选条件构成筛选项元素
         },
+
+        /**
+         * 执行查询
+         */
         exec: function() {
-            //执行查询
             screeningData.html("");
             load.buildLoad(renderData);
         },
+
+        /**
+         * 构成筛选项元素
+         * @param conditions
+         */
         createElements: function(conditions) {
-            //构成筛选项元素
             var i, j, len1, len2, element;
             for(i = 0, len1 = conditions.length; i < len1; i++) {
-                element = new ScreeningElement(conditions[i], elementTpl);
+                element = new ScreeningElement(conditions[i], elementTpl);  //循环创建筛选对象
                 this.elements.push(element);    //加入元素数组
                 load.data[element.field] = "";  //初始化查询条件对象
                 screeningBar.append(element.element);   //渲染查询条件栏
@@ -84,8 +119,13 @@ define([
         }
     };
 
+    /**
+     * ScreeningElement类
+     * @param condition     筛选条件
+     * @param tpl           渲染模板
+     * @constructor
+     */
     function ScreeningElement(condition, tpl) {
-        //筛选项元素类
         this.title = condition["title"];    //条件文字
         this.field = condition["field"];    //条件字段名
         this.list = condition["list"];      //条件筛选项列表
@@ -103,8 +143,10 @@ define([
         });
     }
 
+    /**
+     * 打开筛选列表
+     */
     function openMenu() {
-        //打开筛选列表
         var field = menuTarget.data("field");
         screeningList.children().hide();
         screeningList.children("[data-field="+field+"]").show();
@@ -114,13 +156,19 @@ define([
         menuTarget.addClass("active");
     }
 
+    /**
+     * 关闭筛选列表
+     */
     function closeMenu() {
-        //关闭筛选列表
         screeningList.removeClass("on");
         body.removeClass("lock");
         menuTarget.removeClass("active");
     }
 
+    /**
+     * 渲染数据
+     * @param res
+     */
     function renderData(res) {
         if(res.length == 0 && load.start === undefined) {
             //空数据，显示空界面

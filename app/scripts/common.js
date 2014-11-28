@@ -17,6 +17,7 @@ define(function() {
         e.preventDefault();
     });
 
+    //显示大图
     $("[data-large]").on("click", function(e) {
         location.href = "#picModal";
         $(".big-img").attr("src", this.dataset["large"]);
