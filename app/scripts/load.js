@@ -14,7 +14,7 @@ define(function() {
 
     //查询配置
     var data = {
-        start: undefined,   //数据浮标位置
+        page: 1,            //页码
         count: 10           //一次读取数据数量
     };
 
@@ -29,6 +29,8 @@ define(function() {
      * @type {{init: init, changeMsg: changeMsg, buildLoad: buildLoad, loadList: loadList}}
      */
     var load = {
+        isActive: true,       //加载器开关
+
         /**
          * 初始化
          * @param option
@@ -67,6 +69,7 @@ define(function() {
          */
         loadList: function() {
             var self = this;
+            if(!self.isActive) return false;
             self.changeMsg("MSG_LOADING");      //改变提示文字
             $.ajax({
                 url: self.url,
@@ -77,12 +80,13 @@ define(function() {
                     if(res.length < self.data.count) {
                         //如果取得数据量小于设置数量，判断已读完全部
                         self.changeMsg("MSG_NO_RESULT");    //改变提示文字
+                        self.isActive = false;                //禁用加载器
                     } else {
                         //正常读取
                         self.changeMsg("MSG_WAITING");      //改变提示文字
+                        //页码增加
+                        self.data.page++;
                     }
-                    //修正浮标位置
-                    self.data.start = res["start"];
                     if(typeof self.callback == "function") {
                         self.callback(res["list"]);         //渲染列表
                     }
