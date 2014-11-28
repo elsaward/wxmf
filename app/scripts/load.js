@@ -20,6 +20,28 @@ define(function() {
 
     var loadBar = $(".load-more");  //容器
 
+    var loading = $(".loading");    //加载蒙版
+
+    if(loading.length == 0) {
+        loading = $('<div class="loading">' +
+            '<div class="flex-1"></div>' +
+            '<div class="loading-process">' +
+            '<p><img src="images/loading.gif" alt=""></p>' +
+            '<p>我们的房子正在加载中...</p>' +
+            '</div>' +
+            '<div class="loading-broke" style="display: none;">' +
+            '<p><img src="images/broke.png" alt=""></p>' +
+            '<p>暂无网络连接</p>' +
+            '<p>轻触屏幕重新刷新</p>' +
+            '</div>' +
+            '<div class="flex-1"></div>' +
+            '</div>');
+        $(".wrap-page").after(loading);
+    }
+
+    var process = $(".loading-process");
+    var broke = $(".loading-broke");
+
     loadBar.on("click", function() {
         load.loadList();    //点击容器加载列表
     });
@@ -61,6 +83,7 @@ define(function() {
          */
         buildLoad: function(callback) {
             this.callback = callback;
+            this.showLoading();
             this.loadList();
         },
 
@@ -70,12 +93,13 @@ define(function() {
         loadList: function() {
             var self = this;
             if(!self.isActive) return false;
-            self.changeMsg("MSG_LOADING");      //改变提示文字
+            self.loadingProcess();      //打开加载状态
             $.ajax({
                 url: self.url,
                 type: "get",
                 data: self.data,
                 success: function(res) {
+                    self.closeLoading();
                     if(typeof res == "string") res = $.parseJSON(res);
                     if(res.length < self.data.count) {
                         //如果取得数据量小于设置数量，判断已读完全部
@@ -93,8 +117,44 @@ define(function() {
                 },
                 error: function(req) {
                     //显示错误信息
-                    self.changeMsg("MSG_ERROR");            //改变提示文字
+                    self.loadingBroke();
                 }
+            });
+        },
+
+        /**
+         * 加载提示窗
+         */
+        showLoading: function() {
+            loading.show();
+        },
+
+        /**
+         * 关闭加载提示窗
+         */
+        closeLoading: function() {
+            loading.hide();
+        },
+
+        /**
+         * 加载进行
+         */
+        loadingProcess: function() {
+            process.show();
+            broke.hide();
+            this.changeMsg("MSG_LOADING");      //改变提示文字
+        },
+
+        /**
+         * 加载失败
+         */
+        loadingBroke: function() {
+            var self = this;
+            process.hide();
+            broke.show();
+            self.changeMsg("MSG_ERROR");            //改变提示文字
+            loading.one("click", function() {
+                self.loadList();
             });
         }
     };
